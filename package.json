@@ -1,0 +1,26 @@
+{
+	"name": "greenhat-schema",
+	"version": "0.1.0",
+	"description": "GreenHat schema support.",
+	"license": "MIT",
+	"minimum-stability": "dev",
+	"main": "./index",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gordon-ansell/greenhat-schema"
+	},
+	"authors": [
+		{
+			"name": "Gordon Ansell",
+			"email": "contact@gordonansell.com",
+			"url": "https://gordonansell.com"
+		}
+	],
+	"dependencies": {
+		"greenhat-util": "/Users/gordonansell/Documents/Code/js/gordon-ansell/greenhat-util",
+		"node-fetch": "*"
+	},
+	"engines": {
+		"node": ">=12.16"
+	}
+}
