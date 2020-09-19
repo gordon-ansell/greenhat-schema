@@ -249,7 +249,7 @@ classes:
 
   ListItem:
     fields:
-      item: Thing
+      item: [URL, Thing]
       nextItem: ListItem
       position: [Integer, Text]
       previousItem: ListItem

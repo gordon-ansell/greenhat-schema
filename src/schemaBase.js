@@ -408,6 +408,18 @@ class SchemaBase
     }
 
     /**
+     * Set the ID (plain text).
+     * 
+     * @param   {string}    val         ID to set.
+     * @return  {object}                Ourself. 
+     */
+    idPlain(val) 
+    {
+        this._props['@id'] = val;
+        return this;
+    }
+
+    /**
      * Resolve properties.
      * 
      * @return  {object}                Resolved properties. 
