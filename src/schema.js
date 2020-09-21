@@ -49,6 +49,7 @@ const ListItem = require('./classes/listItem');
 const SoftwareApplication = require('./classes/softwareApplication');
 const MusicGroup = require('./classes/musicGroup');
 const Event = require('./classes/event');
+const EventStatusType = require('./types/eventStatusType');
 
 /**
  * Schema class.
@@ -84,7 +85,7 @@ class Schema
     }
 
     // ===================================================================
-    // Create the various schema.
+    // Create the various class schema.
     // ===================================================================
 
     static thing(id = null) {return new Thing(id);}
@@ -160,6 +161,12 @@ class Schema
         static offer(id = null) {return new Offer(id);}
 
         static product(id = null) {return new Product(id);}
+
+    // ===================================================================
+    // Create the various type schema.
+    // ===================================================================
+
+    static eventStatusType(val) {return new EventStatusType(val);}
 }
 
 module.exports = Schema;

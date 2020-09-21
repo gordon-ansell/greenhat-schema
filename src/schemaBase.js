@@ -14,6 +14,7 @@ const YamlFile = require("greenhat-util/yaml");
 const GreenHatError = require("greenhat-util/error");
 const arr = require("greenhat-util/array");
 const syslog = require('greenhat-util/syslog');
+const TypeBase = require('./types/typeBase');
 
 class GreenHatSchemaError extends GreenHatError {};
 
@@ -312,6 +313,8 @@ class SchemaBase
             if (val.inheritsFrom(type)) {
                 return true;
             }
+        } else if (typeof(val) == "object" && val instanceof TypeBase) {
+            return true;
         } else if (typeof(val) == "object") {
             let k = Object.keys(val);
             if (k.length == 1 && k[0] == '@id') {
@@ -431,6 +434,8 @@ class SchemaBase
         for (let key in this._props) {
             if (this._props[key] instanceof SchemaBase) {
                 ret[key] = this._props[key].resolveProps();
+            } else if (this._props[key] instanceof TypeBase) {
+                ret[key] = this._props[key].resolve();
             } else if (Array.isArray(this._props[key])) {
                 let all = [];
                 for (let item of this._props[key]) {

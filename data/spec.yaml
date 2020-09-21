@@ -270,7 +270,7 @@ classes:
       endDate: [Date, DateTime]
       eventAttendanceMode: [Text, EventAttendanceModeEnumeration]
       eventSchedule: Schedule
-      eventStatus: [Text, EventStatusType]
+      eventStatus: [EventStatusType]
       funder: [Organization, Person]
       inLanguage: [Language, Text]
       isAccessibleForFree: Boolean
