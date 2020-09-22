@@ -49,7 +49,7 @@ const ListItem = require('./classes/listItem');
 const SoftwareApplication = require('./classes/softwareApplication');
 const MusicGroup = require('./classes/musicGroup');
 const Event = require('./classes/event');
-const EventStatusType = require('./types/eventStatusType');
+const TypeBase = require('./types/typeBase');
 
 /**
  * Schema class.
@@ -166,7 +166,8 @@ class Schema
     // Create the various type schema.
     // ===================================================================
 
-    static eventStatusType(val) {return new EventStatusType(val);}
+    static eventStatusType(val) {return new TypeBase('EventStatusType', val);}
+    static itemAvailability(val) {return new TypeBase('ItemAvailability', val);}
 }
 
 module.exports = Schema;

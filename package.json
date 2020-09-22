@@ -17,10 +17,10 @@
 		}
 	],
 	"dependencies": {
-		"greenhat-util": "^0.3.0",
+		"greenhat-util": "*",
 		"node-fetch": "*"
 	},
 	"engines": {
-		"node": ">=12.16"
+		"node": "*"
 	}
 }

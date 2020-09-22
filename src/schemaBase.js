@@ -357,9 +357,9 @@ class SchemaBase
      */
     setProp(name, val, mustNotExist = false)
     {
-        if (val == undefined) {
-            return this.getProp(name);
-        }
+        //if (val == undefined) {
+        //    return this.getProp(name);
+        //}
 
         this._isValidProperty(name, val);
 
