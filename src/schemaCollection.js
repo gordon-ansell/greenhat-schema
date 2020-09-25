@@ -31,12 +31,13 @@ class SchemaCollection
      * 
      * @param   {string}    name                Name of item to add.
      * @param   {object}    item                Schema item to add.
+     * @param   {boolean}   allowOverwrite      Allow overwrite?
      * @return  {object}                        Ourself.
      */
-    add(name, item)
+    add(name, item, allowOverwrite = false)
     {
-        if (this.items[name]) {
-            throw new Error(`Schema collection already has an item called '${item}'.`)
+        if (this.items[name] && !allowOverwrite) {
+            throw new Error(`Schema collection already has an item called '${name}'.`)
         }
         this.items[name] = item;
         return this;
