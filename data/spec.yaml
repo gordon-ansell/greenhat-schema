@@ -192,6 +192,26 @@ classes:
   BlogPosting:
     inherits: [SocialMediaPosting, Article, CreativeWork, Thing]
 
+  Comment:
+    fields:
+      downvoteCount: Integer
+      parentItem: Comment
+      upvoteCount: Integer
+    inherits: [CreativeWork, Thing]
+
+  Question:
+    fields:
+      acceptedAnswer: [Answer, ItemList]
+      answerCount: Integer
+      eduQuestionType: Text
+      suggestedAnswer: [Answer, ItemList]
+    inherits: [Comment, CreativeWork, Thing]
+
+  Answer:
+    fields:
+      answerExplanation: [Comment, WebContent]
+    inherits: [Comment, CreativeWork, Thing]
+
   WebPage:
     fields:
       breadcrumb: [BreacrumbList, Text]
@@ -204,6 +224,9 @@ classes:
       speakable: [SpeakableSpecification, URL]
       specialty: Specialty
     inherits: [CreativeWork, Thing]
+
+  FAQPage:
+    inherits: [WebPage, CreativeWork, Thing]
 
   WebPageElement:
     fields:

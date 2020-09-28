@@ -19,6 +19,7 @@ const MediaObject = require("./classes/mediaObject")
 const ImageObject = require("./classes/imageObject");
 const WebSite = require('./classes/webSite');
 const WebPage = require('./classes/webPage');
+const FAQPage = require('./classes/faqPage');
 const WebPageElement = require('./classes/webPageElement');
 const WPHeader = require('./classes/wpHeader');
 const WPFooter = require('./classes/wpFooter');
@@ -49,6 +50,9 @@ const ListItem = require('./classes/listItem');
 const SoftwareApplication = require('./classes/softwareApplication');
 const MusicGroup = require('./classes/musicGroup');
 const Event = require('./classes/event');
+const Comment = require('./classes/comment');
+const Question = require('./classes/question');
+const Answer = require('./classes/answer');
 const TypeBase = require('./types/typeBase');
 
 /**
@@ -106,6 +110,8 @@ class Schema
 
             static webPage(id = null) {return new WebPage(id);}
             
+                static faqPage(id = null) {return new FAQPage(id);}
+            
             static webPageElement(id = null) {return new WebPageElement(id);}
 
                 static wpHeader(id = null) {return new WPHeader(id);}
@@ -131,6 +137,12 @@ class Schema
             static review(id = null) {return new Review(id);}
 
             static softwareApplication(id = null) {return new SoftwareApplication(id);}
+
+            static comment(id = null) {return new Comment(id);}
+
+                static question(id = null) {return new Question(id);}
+
+                static answer(id = null) {return new Answer(id);}
 
         static rating(id = null) {return new Rating(id);}
 
