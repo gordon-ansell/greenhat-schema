@@ -571,6 +571,47 @@ classes:
       warranty: WarrantyPromise
     inherits: [Thing]
 
+  AggregateOffer:
+    fields:
+      highPrice: [Number, Text]
+      lowPrice: [Number, Text]
+      offerCount: Integer
+      offers: [Demand, Offer]
+    inherits: [Offer, Thing]
+
+  PriceSpecification:
+    fields:
+      eligibleQuantity: QuantitativeValue
+      eligibleTransactionVolume: PriceSpecification
+      maxPrice: Number
+      minPrice: Number
+      price: [Number, Text]
+      priceCurrency: Text
+      validFrom: [Date, DateTime]
+      validThrough: [Date, DateTime]
+      valueAddedTaxIncluded: Boolean
+    inherits: [Thing]
+
+  UnitPriceSpecification:
+    fields:
+      billingIncrement: Number
+      priceType: Text
+      referenceQuantity: QuantitativeValue
+      unitCode: [Text, URL]
+      unitText: Text
+    inherits: [PriceSpecification, Thing]
+
+  QuantitativeValue:
+    fields:
+      additionalProperty: PropertyValue
+      maxValue: Number
+      minValue: Number
+      unitCode: [Text, URL]
+      unitText: Text
+      value: [Boolean, Number, StructuredValue, Text]
+      valueReference: [Enumeration, PropertyValue, QuantitativeValue, QualitativeValue, StructuredValue]
+    inherits: [Thing]
+
   Product:
     fields:
       additionalProperty: PropertyValue

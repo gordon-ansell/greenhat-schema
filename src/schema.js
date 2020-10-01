@@ -41,6 +41,7 @@ const MusicPlaylist = require('./classes/musicPlaylist');
 const MusicRecording = require('./classes/musicRecording');
 const MusicAlbum = require('./classes/musicAlbum');
 const Offer = require('./classes/offer');
+const AggregateOffer = require('./classes/aggregateOffer');
 const Product = require('./classes/product');
 const Review = require('./classes/review');
 const TVSeries = require('./classes/tvSeries');
@@ -54,6 +55,9 @@ const Comment = require('./classes/comment');
 const Question = require('./classes/question');
 const Answer = require('./classes/answer');
 const TypeBase = require('./types/typeBase');
+const PriceSpecification = require('./classes/priceSpecification')
+const UnitPriceSpecification = require('./classes/unitPriceSpecification')
+const QuantitativeValue = require('./classes/quantitativeValue')
 
 /**
  * Schema class.
@@ -172,8 +176,16 @@ class Schema
 
         static offer(id = null) {return new Offer(id);}
 
+            static aggregateOffer(id = null) {return new AggregateOffer(id);}
+
         static product(id = null) {return new Product(id);}
 
+        static priceSpecification(id = null) {return new PriceSpecification(id);}
+
+            static unitPriceSpecification(id = null) {return new UnitPriceSpecification(id);}
+
+        static quantitativeValue(id = null) {return new QuantitativeValue(id);}
+        
     // ===================================================================
     // Create the various type schema.
     // ===================================================================

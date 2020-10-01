@@ -166,8 +166,8 @@ class SchemaBase
                     }
                 }
             }
-
         }
+
     }
 
     /**
