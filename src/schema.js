@@ -191,6 +191,7 @@ class Schema
     // ===================================================================
 
     static eventStatusType(val) {return new TypeBase('EventStatusType', val);}
+    static eventAttendanceMode(val) {return new TypeBase('EventAttendanceMode', val);}
     static itemAvailability(val) {return new TypeBase('ItemAvailability', val);}
 }
 

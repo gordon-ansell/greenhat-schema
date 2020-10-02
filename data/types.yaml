@@ -6,3 +6,7 @@ types:
 
   ItemAvailability: 
     allowed: [Discontinued, InStock, InStoreOnly, LimitedAvailability, OnlineOnly, OutOfStock, PreOrder, PreSale, SoldOut]
+
+  EventAttendanceMode:
+    allowed: [Mixed, Offline, Online]
+    suffix: EventAttendanceMode

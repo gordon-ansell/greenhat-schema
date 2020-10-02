@@ -46,6 +46,12 @@ class TypeBase
     _prefix = '';     
 
     /**
+     * Suffix.
+     * @param   {string}
+     */
+    _suffix = '';     
+
+    /**
      * Input text.
      * @param   {string}
      */
@@ -85,6 +91,12 @@ class TypeBase
             this._prefix = '';
         }
 
+        if (specs.suffix) {
+            this._suffix = specs.suffix;
+        } else {
+            this._suffix = '';
+        }
+
         this._check();
     }
 
@@ -122,12 +134,18 @@ class TypeBase
             }
         }
 
+        if (this._suffix && this._suffix != '') {
+            if (!working.endsWith(this._suffix)) {
+                working = working.slice(-(this._suffix.length));;
+            }
+        }
+
         if (!this._allowed.includes(working)) {
             syslog.inspect(this._allowed);
             throw new GreenHatSchemaError(`'${txt}' (extracted: '${working}') is an invalid value for type ${this._type}.`)
         }
 
-        this._val = url.resolve(TypeBase.context, this._prefix + working);
+        this._val = url.resolve(TypeBase.context, this._prefix + working + this._suffix);
     }
 
     /**

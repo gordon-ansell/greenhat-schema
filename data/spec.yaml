@@ -535,7 +535,7 @@ classes:
       advanceBookingRequirement: QuantitativeValue
       aggregateRating: AggregateRating
       areaServed: [AdminstrativeArea, GeoShape, Place, Text]
-      availability: [ItemAvailability]
+      availability: ItemAvailability
       availabilityEnds: [Date, DateTime, Time]
       availabilityStarts: [Date, DateTime, Time]
       availableAtOrFrom: Place
