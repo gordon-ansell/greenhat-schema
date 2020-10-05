@@ -119,6 +119,10 @@ classes:
       workExample: CreativeWork
       workTranslation: CreativeWork
     inherits: Thing
+    defaultTypes:
+      author: person
+      publisher: organization
+      citation: webPage
 
   MediaObject:
     fields:
@@ -183,6 +187,10 @@ classes:
       speakable: [SpeakableSpecification, URL]
       wordCount: Integer
     inherits: [CreativeWork, Thing]
+    defaultTypes:
+      author: person
+      publisher: organization
+      citation: webPage
 
   SocialMediaPosting:
     fields:
@@ -191,6 +199,10 @@ classes:
 
   BlogPosting:
     inherits: [SocialMediaPosting, Article, CreativeWork, Thing]
+    defaultTypes:
+      author: person
+      publisher: organization
+      citation: webPage
 
   Comment:
     fields:
@@ -224,6 +236,8 @@ classes:
       speakable: [SpeakableSpecification, URL]
       specialty: Specialty
     inherits: [CreativeWork, Thing]
+    defaultTypes:
+      author: person
 
   FAQPage:
     inherits: [WebPage, CreativeWork, Thing]

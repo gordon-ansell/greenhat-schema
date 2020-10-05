@@ -15,6 +15,8 @@ const GreenHatError = require("greenhat-util/error");
 const arr = require("greenhat-util/array");
 const syslog = require('greenhat-util/syslog');
 const TypeBase = require('./types/typeBase');
+const MultiContent = require("greenhat-util/multiContent");
+const MultiDate = require("greenhat-util/multiDate");
 
 class GreenHatSchemaError extends GreenHatError {};
 
@@ -127,7 +129,7 @@ class SchemaBase
      */
     static getSpecsForClass(cls)
     {
-        let classSpecs = this.getSpecs().classes;
+        let classSpecs = SchemaBase.getSpecs().classes;
         if (!cls in classSpecs) {
             throw new GreenHatSchemaError(`No schema class definition specs found for '${cls}'.`)
         }
@@ -139,8 +141,9 @@ class SchemaBase
      * Constructor.
      * 
      * @param   {string}    id      ID value.
+     * @param   {object}    vals    Schema vals.
      */
-    constructor(id)
+    constructor(id, vals = null)
     {
         if (id) {
             this.id(id);
@@ -168,6 +171,106 @@ class SchemaBase
             }
         }
 
+        if (vals) {
+            this._parseVals(vals);
+        }
+
+    }
+
+    /**
+     * Set a bunch of properties on this class.
+     * 
+     * @param   {objects}   vals    Properties.
+     */
+    setProps(vals)
+    {
+        this._parseVals(vals);
+        return this;
+    }
+
+    /**
+     * Parse schema values.
+     * 
+     * @param   {object}    vals    Values to parse. 
+     */
+    _parseVals(vals)
+    {
+        for (let key in vals) {
+            if (key.startsWith('_')) {
+                continue;
+            }
+            if (vals[key] === null || vals[key] === undefined) {
+                continue;
+            }
+            if (Array.isArray(vals[key]) && vals[key].length == 0) {
+                continue;
+            }
+            if (vals[key] instanceof MultiContent) {
+                this.setProp(key, vals[key].text);
+            } else if (vals[key] instanceof MultiDate) {
+                this.setProp(key, vals[key].iso);
+            } else if (Array.isArray(vals[key])) {
+                this.setProp(key, vals[key]);
+            } else if (typeof(vals[key]) == "object") {
+
+                let subType;
+                let subId = null;
+                
+                if (vals[key].type) {
+                    subType = vals[key].type;
+                    delete vals[key].type;
+                } else if (this._specs.defaultTypes && this._specs.defaultTypes[key]) {
+                    subType = this._specs.defaultTypes[key];
+                } else {
+                    throw new GreenHatSchemaError(`No type or defaultType specified for ${key}.`);
+                }
+                
+                if (vals[key].id) {
+                    subId = vals[key].id;
+                    delete vals[key].id;
+                }
+
+                let sub = require("./schema").create(subType, subId);
+                let filteredValues = sub.filterKeys(vals[key]);
+                sub.setProps(filteredValues);
+                this.setProp(key, sub);
+            } else if (vals[key].startsWith('#')) {
+                this.setProp(key, SchemaBase.ref(vals[key].substring(1)));
+            } else {
+                this.setProp(key, vals[key]);
+            }
+        }
+    }
+
+    /**
+     * Get the field keys for this class.
+     * 
+     * @return  {string[]}          Class field keys.
+     */
+    getFieldKeys()
+    {
+        return Object.keys(this._specs.fields);
+    }
+
+    /**
+     * Filter an object's keys according to what's allowed.
+     * 
+     * @param   {object}    o       Object to filter.
+     * @param   {string[]}  xtra    Extra keys to filter.
+     * @return  {onject}            With keys filtered.
+     */
+    filterKeys(o, xtra = [])
+    {
+        let fks = this.getFieldKeys();
+
+        const filtered = Object.keys(o)
+            .filter(key => fks.includes(key) && !xtra.includes(key))
+            .reduce((obj, key) => {
+                obj[key] = o[key];
+                return obj;
+            }, {});
+
+        return filtered;
     }
 
     /**

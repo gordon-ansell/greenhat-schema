@@ -10,6 +10,8 @@
 
 const path = require('path');
 const str = require("greenhat-util/string");
+const GreenHatError = require("greenhat-util/error");
+class GreenHatSchemaError extends GreenHatError {};
 
 const SchemaBase = require("./schemaBase")
 const Thing = require("./classes/thing")
@@ -92,99 +94,114 @@ class Schema
         return SchemaBase.ref(raw);
     }
 
+    /**
+     * Create generic schema class.
+     * 
+     * @param   {string}    name    Name.
+     * @param   {string}    id      ID.
+     * @param   {object}    vals    Values.
+     */
+    static create(name, id = null, vals = null)
+    {
+        if (!Schema[name]) {
+            throw new GreenHatSchemaError(`No schema class definition for '${name}'.`);
+        }
+        return Schema[name](id, vals);
+    }
+
     // ===================================================================
     // Create the various class schema.
     // ===================================================================
 
-    static thing(id = null) {return new Thing(id);}
+    static thing(id = null, vals = null) {return new Thing(id, vals);}
 
-        static creativeWork(id = null) {return new CreativeWork(id);}
+        static creativeWork(id = null, vals = null) {return new CreativeWork(id, vals);}
 
-            static creativeWorkSeries(id = null) {return new CreativeWorkSeries(id);}
+            static creativeWorkSeries(id = null, vals = null) {return new CreativeWorkSeries(id, vals);}
 
-                static tvSeries(id = null) {return new TVSeries(id);}
+                static tvSeries(id = null, vals = null) {return new TVSeries(id, vals);}
 
-            static mediaObject(id = null) {return new MediaObject(id);}
+            static mediaObject(id = null, vals = null) {return new MediaObject(id, vals);}
 
-                static imageObject(id = null) {return new ImageObject(id);}
+                static imageObject(id = null, vals = null) {return new ImageObject(id, vals);}
 
-                static videoObject(id = null) {return new VideoObject(id);}
+                static videoObject(id = null, vals = null) {return new VideoObject(id, vals);}
             
-            static webSite(id = null) {return new WebSite(id);}
+            static webSite(id = null, vals = null) {return new WebSite(id, vals);}
 
-            static webPage(id = null) {return new WebPage(id);}
+            static webPage(id = null, vals = null) {return new WebPage(id, vals);}
             
-                static faqPage(id = null) {return new FAQPage(id);}
+                static faqPage(id = null, vals = null) {return new FAQPage(id, vals);}
             
-            static webPageElement(id = null) {return new WebPageElement(id);}
+            static webPageElement(id = null, vals = null) {return new WebPageElement(id, vals);}
 
-                static wpHeader(id = null) {return new WPHeader(id);}
+                static wpHeader(id = null, vals = null) {return new WPHeader(id, vals);}
 
-                static wpFooter(id = null) {return new WPFooter(id);}
+                static wpFooter(id = null, vals = null) {return new WPFooter(id, vals);}
 
-                static siteNavigationElement(id = null) {return new SiteNavigationElement(id);}
+                static siteNavigationElement(id = null, vals = null) {return new SiteNavigationElement(id, vals);}
             
-            static article(id = null) {return new Article(id);}
+            static article(id = null, vals = null) {return new Article(id, vals);}
 
-                static socialMediaPosting(id = null) {return new SocialMediaPosting(id);}
+                static socialMediaPosting(id = null, vals = null) {return new SocialMediaPosting(id, vals);}
 
-                    static blogPosting(id = null) {return new BlogPosting(id);}
+                    static blogPosting(id = null, vals = null) {return new BlogPosting(id, vals);}
 
-            static movie(id = null) {return new Movie(id);}
+            static movie(id = null, vals = null) {return new Movie(id, vals);}
 
-            static musicPlaylist(id = null) {return new MusicPlaylist(id);}
+            static musicPlaylist(id = null, vals = null) {return new MusicPlaylist(id, vals);}
 
-                static musicAlbum(id = null) {return new MusicAlbum(id);}
+                static musicAlbum(id = null, vals = null) {return new MusicAlbum(id, vals);}
 
-            static musicRecording(id = null) {return new MusicRecording(id);}
+            static musicRecording(id = null, vals = null) {return new MusicRecording(id, vals);}
 
-            static review(id = null) {return new Review(id);}
+            static review(id = null, vals = null) {return new Review(id, vals);}
 
-            static softwareApplication(id = null) {return new SoftwareApplication(id);}
+            static softwareApplication(id = null, vals = null) {return new SoftwareApplication(id, vals);}
 
-            static comment(id = null) {return new Comment(id);}
+            static comment(id = null, vals = null) {return new Comment(id, vals);}
 
-                static question(id = null) {return new Question(id);}
+                static question(id = null, vals = null) {return new Question(id, vals);}
 
-                static answer(id = null) {return new Answer(id);}
+                static answer(id = null, vals = null) {return new Answer(id, vals);}
 
-        static rating(id = null) {return new Rating(id);}
+        static rating(id = null, vals = null) {return new Rating(id, vals);}
 
-            static aggregateRating(id = null) {return new AggregateRating(id);}
+            static aggregateRating(id = null, vals = null) {return new AggregateRating(id, vals);}
 
-        static itemList(id = null) {return new ItemList(id);}
+        static itemList(id = null, vals = null) {return new ItemList(id, vals);}
 
-            static breadcrumbList(id = null) {return new BreadcrumbList(id);}
+            static breadcrumbList(id = null, vals = null) {return new BreadcrumbList(id, vals);}
 
-        static listItem(id = null) {return new ListItem(id);}
+        static listItem(id = null, vals = null) {return new ListItem(id, vals);}
 
-        static event(id = null) {return new Event(id);}
+        static event(id = null, vals = null) {return new Event(id, vals);}
 
-        static howTo(id = null) {return new HowTo(id);}
+        static howTo(id = null, vals = null) {return new HowTo(id, vals);}
 
-        static howToStep(id = null) {return new HowToStep(id);}
+        static howToStep(id = null, vals = null) {return new HowToStep(id, vals);}
 
-        static organization(id = null) {return new Organization(id);}
+        static organization(id = null, vals = null) {return new Organization(id, vals);}
 
-            static localBusiness(id = null) {return new LocalBusiness(id);}
+            static localBusiness(id = null, vals = null) {return new LocalBusiness(id, vals);}
 
-            static musicGroup(id = null) {return new MusicGroup(id);}
+            static musicGroup(id = null, vals = null) {return new MusicGroup(id, vals);}
 
-        static place(id = null) {return new Place(id);}
+        static place(id = null, vals = null) {return new Place(id, vals);}
 
-        static person(id = null) {return new Person(id);}
+        static person(id = null, vals = null) {return new Person(id, vals);}
 
-        static offer(id = null) {return new Offer(id);}
+        static offer(id = null, vals = null) {return new Offer(id, vals);}
 
-            static aggregateOffer(id = null) {return new AggregateOffer(id);}
+            static aggregateOffer(id = null, vals = null) {return new AggregateOffer(id, vals);}
 
-        static product(id = null) {return new Product(id);}
+        static product(id = null, vals = null) {return new Product(id, vals);}
 
-        static priceSpecification(id = null) {return new PriceSpecification(id);}
+        static priceSpecification(id = null, vals = null) {return new PriceSpecification(id, vals);}
 
-            static unitPriceSpecification(id = null) {return new UnitPriceSpecification(id);}
+            static unitPriceSpecification(id = null, vals = null) {return new UnitPriceSpecification(id, vals);}
 
-        static quantitativeValue(id = null) {return new QuantitativeValue(id);}
+        static quantitativeValue(id = null, vals = null) {return new QuantitativeValue(id, vals);}
         
     // ===================================================================
     // Create the various type schema.
