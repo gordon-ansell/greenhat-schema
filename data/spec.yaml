@@ -242,6 +242,9 @@ classes:
   FAQPage:
     inherits: [WebPage, CreativeWork, Thing]
 
+  QAPage:
+    inherits: [WebPage, CreativeWork, Thing]
+
   WebPageElement:
     fields:
       cssSelector: CssSelectorType

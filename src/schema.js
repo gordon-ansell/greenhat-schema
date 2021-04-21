@@ -22,6 +22,7 @@ const ImageObject = require("./classes/imageObject");
 const WebSite = require('./classes/webSite');
 const WebPage = require('./classes/webPage');
 const FAQPage = require('./classes/faqPage');
+const QAPage = require('./classes/qaPage');
 const WebPageElement = require('./classes/webPageElement');
 const WPHeader = require('./classes/wpHeader');
 const WPFooter = require('./classes/wpFooter');
@@ -132,6 +133,8 @@ class Schema
             static webPage(id = null, vals = null) {return new WebPage(id, vals);}
             
                 static faqPage(id = null, vals = null) {return new FAQPage(id, vals);}
+            
+                static qaPage(id = null, vals = null) {return new QAPage(id, vals);}
             
             static webPageElement(id = null, vals = null) {return new WebPageElement(id, vals);}
 
